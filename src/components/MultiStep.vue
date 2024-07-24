@@ -37,6 +37,8 @@ const handleSubmit = () => {
   if (isCurrentStepValid.value) {
     console.log("Form Data:", formData.value)
     alert(`Form Data: ${JSON.stringify(formData.value.value)}`)
+    formData.value = {}
+    currentStep.value = 1
   }
 }
 </script>
@@ -73,6 +75,7 @@ const handleSubmit = () => {
       </div>
 
       <FormStep
+        :key="currentStep"
         :fields="props.stepForm[currentStep - 1].fields"
         :modelValue="formData.value"
         @update:modelValue="(newData) => (formData.value = newData)"
