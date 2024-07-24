@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
 import FormStep from "./FormStep.vue"
+import PreviewCard from "../components/card/Preview.vue"
 
 import type { Form } from "../types/form"
 
@@ -10,6 +11,7 @@ const props = defineProps<{
 
 const currentStep = ref<number>(1)
 const formData = ref<Record<string, any>>({})
+const showPreview = ref<boolean>(false)
 
 const isCurrentStepValid = ref<boolean>(false)
 
@@ -36,16 +38,24 @@ const prevStep = () => {
 const handleSubmit = () => {
   if (isCurrentStepValid.value) {
     console.log("Form Data:", formData.value)
-    alert(`Form Data: ${JSON.stringify(formData.value.value)}`)
-    formData.value = {}
-    currentStep.value = 1
+    showPreview.value = true
   }
+}
+
+const handleClosePreview = () => {
+  showPreview.value = false
+  formData.value = {}
+  currentStep.value = 1
 }
 </script>
 
 <template>
-  <div class="w-[50vw] mx-auto mt-10">
-    <form @submit.prevent="handleSubmit" class="flex flex-col gap-y-4">
+  <div class="w-[90vw] lg:w-[50vw] mx-auto mt-10">
+    <form
+      v-if="!showPreview"
+      @submit.prevent="handleSubmit"
+      class="flex flex-col gap-y-4"
+    >
       <div class="flex items-center gap-x-2 justify-center mb-8">
         <div
           v-for="(item, index) in props.stepForm"
@@ -77,6 +87,10 @@ const handleSubmit = () => {
         </div>
       </div>
 
+      <h1 class="text-xl font-bold">
+        {{ props.stepForm[currentStep - 1].title }}
+      </h1>
+      <p>{{ props.stepForm[currentStep - 1].description }}</p>
       <FormStep
         :key="currentStep"
         :fields="props.stepForm[currentStep - 1].fields"
@@ -119,6 +133,12 @@ const handleSubmit = () => {
         </button>
       </div>
     </form>
+
+    <PreviewCard
+      v-if="showPreview"
+      :formData="formData"
+      @close="handleClosePreview"
+    />
   </div>
 </template>
 

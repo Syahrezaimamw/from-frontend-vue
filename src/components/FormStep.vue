@@ -32,7 +32,7 @@ const validateFields = () => {
 </script>
 
 <template>
-  <div class="w-full mt-10">
+  <div class="w-full mt-10 bg-slate-50 p-4">
     <div v-for="field in fields" :key="field.label" class="mb-4">
       <label class="block font-bold mb-2">{{ field.label }}</label>
       <div v-if="field.type === 'textfield'">
