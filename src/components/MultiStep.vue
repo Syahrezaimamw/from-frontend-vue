@@ -44,7 +44,7 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div class="w-[50vw] mx-auto">
+  <div class="w-[50vw] mx-auto mt-10">
     <form @submit.prevent="handleSubmit" class="flex flex-col gap-y-4">
       <div class="flex items-center gap-x-2 justify-center mb-8">
         <div
@@ -52,7 +52,10 @@ const handleSubmit = () => {
           :key="index"
           class="flex items-center gap-x-2"
         >
-          <div v-if="index === 0" class="w-28 h-[2px] bg-blue-700"></div>
+          <div
+            v-if="index === 0"
+            class="w-16 md:w-28 h-[2px] bg-blue-700"
+          ></div>
           <div
             class="rounded-full w-16 h-16 text-xl font-bold text-center pt-4 cursor-pointer"
             :class="`${
@@ -65,11 +68,11 @@ const handleSubmit = () => {
           </div>
           <div
             v-if="index !== props.stepForm.length - 1"
-            class="w-36 h-[2px] bg-blue-700"
+            class="w-24 md:w-36 h-[2px] bg-blue-700"
           ></div>
           <div
             v-if="index === props.stepForm.length - 1"
-            class="w-28 h-[2px] bg-blue-700"
+            class="w-16 md:w-28 h-[2px] bg-blue-700"
           ></div>
         </div>
       </div>
