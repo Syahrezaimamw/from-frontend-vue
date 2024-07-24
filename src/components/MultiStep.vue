@@ -6,7 +6,7 @@ import PreviewCard from "../components/card/Preview.vue"
 import type { Form } from "../types/form"
 
 const props = defineProps<{
-  stepForm: Form[]
+  stepForm: Form
 }>()
 
 const currentStep = ref<number>(1)
@@ -67,22 +67,29 @@ const handleClosePreview = () => {
             class="w-16 md:w-28 h-[2px] bg-blue-700"
           ></div>
           <div
-            class="rounded-full w-16 h-16 text-xl font-bold text-center pt-4 cursor-pointer"
-            :class="`${
-              currentStep === item.step
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200'
-            } `"
+            :class="{
+              'rounded-full w-16 h-16 text-xl font-bold text-center pt-4 cursor-pointer': true,
+              'bg-blue-600 text-white': currentStep >= item.step,
+              'bg-gray-200': currentStep < item.step,
+            }"
           >
             <span>{{ item.step }}</span>
           </div>
           <div
             v-if="index !== props.stepForm.length - 1"
-            class="w-24 md:w-36 h-[2px] bg-blue-700"
+            :class="{
+              'w-24 md:w-36 h-[2px]': true,
+              'bg-blue-700': currentStep >= item.step,
+              'bg-gray-300': currentStep < item.step,
+            }"
           ></div>
           <div
             v-if="index === props.stepForm.length - 1"
-            class="w-16 md:w-28 h-[2px] bg-blue-700"
+            :class="{
+              'w-16 md:w-28 h-[2px]': true,
+              'bg-blue-700': currentStep >= item.step,
+              'bg-gray-300': currentStep < item.step,
+            }"
           ></div>
         </div>
       </div>
