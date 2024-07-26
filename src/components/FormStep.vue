@@ -46,16 +46,18 @@ const validateFields = () => {
       <div v-if="field.type === 'radio'" class="flex gap-2">
         <div
           v-for="option in field.options"
-          :key="option.value"
+          :key="typeof option === 'object' ? option.value : option"
           class="flex items-center"
         >
           <input
             type="radio"
-            :value="option.value"
+            :value="typeof option === 'object' ? option.value : option"
             v-model="formData[field.label]"
             class="mr-2"
           />
-          <label>{{ option.label }}</label>
+          <label>{{
+            typeof option === "object" ? option.value : option
+          }}</label>
         </div>
       </div>
       <div v-if="field.type === 'textarea'">
@@ -74,7 +76,10 @@ const validateFields = () => {
           class="border p-2 w-full"
         />
         <datalist id="autocompleteOptions">
-          <option v-for="option in field.options" :key="option">
+          <option
+            v-for="option in field.options"
+            :key="typeof option === 'object' ? option.value : option"
+          >
             {{ option }}
           </option>
         </datalist>
