@@ -2,12 +2,31 @@
   {
     "step": 1,
     "title": "Personal Information",
-    "description": "Please fill out your personal information",
+    "description": "Harap Isi Semua Field Yang Tersedia dengan tepat dan sesuai",
     "fields": [
       {
         "type": "textfield",
-        "label": "Name",
+        "label": "Masukan Nama Lengkap",
         "placeholder": "Enter your name",
+        "required": true
+      },
+  
+      {
+        "type": "textfield",
+        "label": "Masukan Alamat Tempat Tinggal",
+        "placeholder": "Enter your Alamat ",
+        "required": true
+      },
+      {
+        "type": "textfield",
+        "label": "Masukan Alamat Tempat Tinggal",
+        "placeholder": "Enter your Alamat ",
+        "required": true
+      },
+      {
+        "type": "textfield",
+        "label": "Masukan Umur Sesuai Tanggal Lahir",
+        "placeholder": "Enter your Umur ",
         "required": true
       },
       {
